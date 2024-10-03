@@ -1,26 +1,10 @@
 ---
 - name: Debian specific settings
-  hosts: debian
+  hosts: all
   remote_user: user
 
   tasks:
-  - name: Ensure apache is at the latest version
-    ansible.builtin.yum:
-      name: httpd
-      state: latest
-
-  - name: Write the apache config file
-    ansible.builtin.template:
-      src: /srv/httpd.j2
-      dest: /etc/httpd.conf
-
-- name: OpenSUSE specific settings
-  hosts: opensuse
-  remote_user: user
-
-  tasks:
-  - name: Ensure that firewalld is stopped and disabled
-    ansible.builtin.service:
-      name: firewalld
-      state: stopped
-      enabled: false
+  - name: Disable Firewall
+    community.general.ufw:
+      state:  disabled
+    become: true
