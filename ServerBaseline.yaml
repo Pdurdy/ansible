@@ -1,6 +1,6 @@
 ---
 - name: Debian specific settings
-  hosts: all
+  hosts: k3s
   remote_user: user
 
   tasks:
